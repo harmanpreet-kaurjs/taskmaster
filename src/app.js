@@ -13,7 +13,20 @@ class App extends Component {
       player: 0,
     };
   }
-
+  addTodo = (text, priority, date, time) => {
+    api
+      .createTodo({
+        id: uuid.v1(),
+        completed: false,
+        text: text,
+        priority: priority,
+        date: date,
+        time: time,
+      })
+      .then((todo) => {
+        api.getTodos().then((todos) => this.setState({ todos }));
+      });
+  };
   addTodo = (text) => {
     api
       .createTodo({
